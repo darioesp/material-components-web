@@ -157,6 +157,7 @@ export class MDCSliderFoundation extends MDCFoundation<MDCSliderAdapter> {
       removeThumbStyleProperty: () => undefined,
       setTrackActiveStyleProperty: () => undefined,
       removeTrackActiveStyleProperty: () => undefined,
+      alignValueIndicator: () => undefined,
       setValueIndicatorText: () => undefined,
       getValueToAriaValueTextFn: () => null,
       updateTickMarks: () => undefined,
@@ -844,10 +845,12 @@ export class MDCSliderFoundation extends MDCFoundation<MDCSliderAdapter> {
         if (thumb === Thumb.START || !thumb || !this.initialStylesRemoved) {
           this.adapter.setThumbStyleProperty(
               transformProp, `translateX(${thumbStartPos}px)`, Thumb.START);
+          this.adapter.alignValueIndicator(Thumb.START, thumbStartPos);
         }
         if (thumb === Thumb.END || !thumb || !this.initialStylesRemoved) {
           this.adapter.setThumbStyleProperty(
               transformProp, `translateX(${thumbEndPos}px)`, Thumb.END);
+          this.adapter.alignValueIndicator(Thumb.END, thumbEndPos);
         }
 
         this.removeInitialStyles(isRtl);
@@ -858,6 +861,7 @@ export class MDCSliderFoundation extends MDCFoundation<MDCSliderAdapter> {
         const thumbStartPos = isRtl ? this.rect.width - rangePx : rangePx;
         this.adapter.setThumbStyleProperty(
             transformProp, `translateX(${thumbStartPos}px)`, Thumb.END);
+        this.adapter.alignValueIndicator(Thumb.END, thumbStartPos);
         this.adapter.setTrackActiveStyleProperty(
             transformProp, `scaleX(${pctComplete})`);
 

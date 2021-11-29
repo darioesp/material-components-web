@@ -349,6 +349,10 @@ $_track-inactive-height: 4px;
     }
 
     // Caret: https://css-tricks.com/snippets/css/css-triangle/
+    --slider-value-indicator-caret-left: 50%;
+    --slider-value-indicator-caret-right: auto;
+    --slider-value-indicator-caret-transform: translateX(-50%);
+
     &::before {
       @include feature-targeting.targets($feat-structure) {
         border-left: $_value-indicator-caret-width solid transparent;
@@ -358,9 +362,11 @@ $_track-inactive-height: 4px;
         content: '';
         height: 0;
         @include rtl.ignore-next-line();
-        left: 50%;
+        left: var(--slider-value-indicator-caret-left);
         position: absolute;
-        transform: translateX(-50%);
+        @include rtl.ignore-next-line();
+        right: var(--slider-value-indicator-caret-right);
+        transform: var(--slider-value-indicator-caret-transform);
         width: 0;
       }
     }

@@ -41,6 +41,8 @@ export const cssClasses = {
   TRACK: 'mdc-slider__track',
   // The active track fill element that will be scaled as the value changes.
   TRACK_ACTIVE: 'mdc-slider__track--active_fill',
+  VALUE_INDICATOR: 'mdc-slider__value-indicator',
+  VALUE_INDICATOR_CONTAINER: 'mdc-slider__value-indicator-container',
   VALUE_INDICATOR_TEXT: 'mdc-slider__value-indicator-text',
 };
 

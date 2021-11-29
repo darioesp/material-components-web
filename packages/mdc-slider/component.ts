@@ -110,6 +110,50 @@ export class MDCSlider extends MDCComponent<MDCSliderFoundation> {
       removeTrackActiveStyleProperty: (propertyName) => {
         this.trackActive.style.removeProperty(propertyName);
       },
+      alignValueIndicator: (thumb: Thumb, thumbPos: number) => {
+        const thumbEl = this.getThumbEl(thumb);
+        const valueIndicatorContainer = thumbEl.querySelector<HTMLElement>(
+            `.${cssClasses.VALUE_INDICATOR_CONTAINER}`);
+        const valueIndicator = thumbEl.querySelector<HTMLElement>(
+            `.${cssClasses.VALUE_INDICATOR}`);
+        const thumbHalfWidth = thumbEl.getBoundingClientRect().width / 2;
+        const containerWidth =
+            valueIndicatorContainer!.getBoundingClientRect().width;
+        const sliderWidth = this.root.getBoundingClientRect().width;
+        if (containerWidth / 2 > thumbPos + thumbHalfWidth) {
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-left', `${thumbHalfWidth}px`);
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-right', 'auto');
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-transform', 'translateX(-50%)');
+          valueIndicatorContainer!.style.setProperty('left', '0');
+          valueIndicatorContainer!.style.setProperty('right', 'auto');
+          valueIndicatorContainer!.style.setProperty('transform', 'none');
+        } else if (
+            containerWidth / 2 > sliderWidth - thumbPos + thumbHalfWidth) {
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-left', 'auto');
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-right', `${thumbHalfWidth}px`);
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-transform', 'translateX(50%)');
+          valueIndicatorContainer!.style.setProperty('left', 'auto');
+          valueIndicatorContainer!.style.setProperty('right', '0');
+          valueIndicatorContainer!.style.setProperty('transform', 'none');
+        } else {
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-left', '50%');
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-right', 'auto');
+          valueIndicator!.style.setProperty(
+              '--slider-value-indicator-caret-transform', 'translateX(-50%)');
+          valueIndicatorContainer!.style.setProperty('left', '50%');
+          valueIndicatorContainer!.style.setProperty('right', 'auto');
+          valueIndicatorContainer!.style.setProperty(
+              'transform', 'translateX(-50%)');
+        }
+      },
       setValueIndicatorText: (value: number, thumb: Thumb) => {
         const valueIndicatorEl =
             this.getThumbEl(thumb).querySelector<HTMLElement>(

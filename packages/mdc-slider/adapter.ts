@@ -165,6 +165,15 @@ export interface MDCSliderAdapter {
   removeTrackActiveStyleProperty(propertyName: string): void;
 
   /**
+   * Updates value indicator styles to keep it within the bounds of the slider.
+   * - If thumb is `Thumb.START`, updates value indicator on start thumb (for
+   * range slider variant).
+   * - If thumb is `Thumb.END`, updates value indicator on end thumb (or only
+   * thumb for single point slider).
+   */
+  alignValueIndicator(thumb: Thumb, thumbPos: number): void;
+
+  /**
    * Sets value indicator text based on the given value.
    * - If thumb is `Thumb.START`, updates value indicator on start thumb
    *   (for range slider variant).
